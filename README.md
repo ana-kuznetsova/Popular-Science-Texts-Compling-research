@@ -22,7 +22,7 @@ Popular text must become understandable for the public, thus it should not be ov
 
 *Problems:* A variety of language constructions that are used in different scientific areas to introduce terminology. We will have to read a bunch of texts extracting specific frame templates for term introduction. 
 
-*Expected result:* Term frequency dictionary of popular science texts; terms' graph (nodes will be the extracted terms and ribs will be their joint occurrence in the texts).
+*Expected result:* Term frequency dictionary of popular science texts; terms' graph (nodes will be the extracted terms and ribs will be their joint occurrence in the texts), word2vec model and a visualization of terms relations based on it.
 
 **3. Who are the most cited researchers in popular texts?**
 Sometimes the names of scientists who discovered something are mentioned in popular scientific articles, but not all the time. There is an assumption that scientific knowledge is of collective nature and the influence of a certain person is considered to be minimal. We would like to find out whether it is true or not. How frequently is the researcher's name mentioned in popular scientific articles?
