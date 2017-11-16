@@ -29,7 +29,7 @@ Sometimes the names of scientists who discovered something are mentioned in popu
 
 *Methods:* named entity recognition. 
 
-*Problems:* Not all the named entities in articles are personal names. How shall we distinguish them?
+*Problems:* Not all the named entities in articles are personal names and not all the personal names are the names of scientists. How shall we distinguish them?
 
 *Expected result:* The most cited scientists' chart in comparison with official bibliographical metrics. 
 
