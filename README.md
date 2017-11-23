@@ -50,3 +50,18 @@ Sometimes the names of scientists who discovered something are mentioned in popu
 5. Indicator: https://indicator.ru/
 6. Cherdak: https://chrdk.ru/
 7. Hub on Geektimes: https://geektimes.ru/hub/popular_science/
+
+
+## Team & contacts ##
+
+Anna Lapidus: anyalapidus@list.ru
+
+Anastasia Kuznetsova: menina.indigena.17@gmail.com
+
+Julia Kolomenskaya: j.kolomenskaya@gmail.com
+
+Ksenia Samoilenko: kssamoylenko@yandex.ru
+
+**Research Supervisor**
+
+Boris Orekhov: nevmenandr@gmail.com 
