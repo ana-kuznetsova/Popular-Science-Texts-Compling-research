@@ -46,7 +46,7 @@ Sometimes the names of scientists who discovered something are mentioned in popu
 1. PostNauka: https://postnauka.ru/
 2. Lecture on Polit.ru: http://www.polit.ru/lectures/publ_lect/
 3. ProScience rubric on Polit.ru: http://www.polit.ru/rubric/proscience/
-4. Elementy: https://elementy.ru/
+4. Arzamas: http://arzamas.academy/
 5. Indicator: https://indicator.ru/
 6. Cherdak: https://chrdk.ru/
 7. Hub on Geektimes: https://geektimes.ru/hub/popular_science/
