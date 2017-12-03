@@ -50,6 +50,7 @@ Sometimes the names of scientists who discovered something are mentioned in popu
 5. Indicator: https://indicator.ru/
 6. Cherdak: https://chrdk.ru/
 7. Hub on Geektimes: https://geektimes.ru/hub/popular_science/
+8. N+1: http://nplus1.ru/
 
 
 ## Team & contacts ##
