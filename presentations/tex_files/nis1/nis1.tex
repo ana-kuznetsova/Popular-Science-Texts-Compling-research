@@ -1,0 +1,272 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{beaver} % or try albatross, beaver, crane, ...
+  \usefonttheme{serif}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,portuguese, main=russian]{babel}	% локализация и переносы
+
+%Диаграмы
+\usepackage{smartdiagram}
+
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{xcolor}
+\usepackage{listings}
+\lstset
+{
+    language=[LaTeX]TeX,
+    breaklines=true,
+    basicstyle=\tt\scriptsize,
+    %commentstyle=\color{green}
+    keywordstyle=\color{blue},
+    %stringstyle=\color{black}
+    identifierstyle=\color{magenta},
+}
+
+\title[Научно-исследовательский семинар]{Комплинг исследование научно-популярных текстов}
+\author{Анастасия Кузнецова, Анна Лапидус, \\ Юлия Коломенская, Ксения Самойленко}
+\institute{НИУ ВШЭ}
+\date{9 ноября 2017}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{План доклада}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+\begin{frame}{План доклада}
+  \tableofcontents
+\end{frame}
+
+\section{Цели и задачи проекта}
+
+\begin{frame}{Цели и задачи проекта}
+\textbf{Цель проекта:} \\
+Компьютерно-лингвистический анализ научно-популярных текстов на русском языке.\\
+\textbf{Ожидаемые результаты проекта:} \\
+\begin{itemize}
+\item Создание словаря научно-популярных терминов и рейтинга цитируемости ученых
+\item Написание нескольких статей на основе выводов, сделанных в ходе исследования
+\item Потенциал для использования полученных данных в прикладной сфере, например, для создания компилятора научно-популярных новостей или обзоров
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Цели и задачи проекта}
+\textbf{Задачи для реализации проекта:} \\
+\begin{itemize}
+\item Проанализировать список русскоязычных научно-популярных ресурсов и определить релевантные для данного исследования
+\item Собрать данные:
+	\begin{itemize}
+	\item Запросить непосредственно у владельцев ресурсов
+    \item Обкачать сайты (учимся работать с краулером, API)
+	\end{itemize}
+\item Разметить и структурировать полученные данные (text clusterization)
+\item Непосредственно анализ данных (text similarities, fact extraction etc)
+\item Выводы
+\end{itemize}
+
+\end{frame}
+
+\section{Этапы работы}
+
+\begin{frame}{Этапы работы}
+\smartdiagram[descriptive diagram]{
+  {Модуль 2,{\textbf{(0--1)} Сбор данных, анализ и классификация источников}},
+  {Модуль 3, {\textbf{(2--3)} Применение комплинг \\ методов, обработка \\ результатов}},
+  {Модуль 4, \textbf{(4)} Написание статей}}
+
+
+
+
+\end{frame}
+
+\section{Что уже сделано?}
+\begin{frame}{Что уже сделано?}
+\begin{itemize}
+\item Создан репозиторий проекта на GitHub
+\item 04.11 проведена первая беседа с научным руководителем, определена общая стратегия работы над проектом и план работы на 2 модуль
+\item Участники проекта распределили между собой ресурсы для анализа, результаты исследования выложили на GitHub
+\item Обсудили возникшие в ходе анализа ресурсов вопросы:
+	\begin{itemize}
+	\item Какие  тексты включать в исследование?
+    \item Включать ли новостные статьи?
+    \item Переводные статьи?
+	\end{itemize}
+\item Обратились за помощью к редакторам научно-популярных сайтов
+\end{itemize}
+\end{frame}
+
+
+\section{Ресурсы}
+\begin{frame}{N+1. Контент}
+   \begin{enumerate}
+   \item Новости (на основе \textit{Science}, \textit{Nature} и др. авторитетных изданий)
+   \item Материалы
+   		\begin{itemize}
+   		\item Лонгриды (оригинальные статьи авторов)
+        \item Экспертные интервью
+   		\end{itemize}
+    \item Блоги
+    \item Тесты и игры, которые мы рассматривать не будем
+   \end{enumerate}
+
+\end{frame}
+
+\begin{frame}{N+1. Структура}
+\begin{itemize}
+\item Тексты разбиты по рубрикам, разным предметным областям (около 35)
+\item На главной странице разбиты по тегам, а не по рубрикам
+\item Едины формат разметки текстов статей
+\item Тегами в интервью обозначена прямая речь интервьюера и эксперта
+\item \textbf{Проблема:} лонгриды и экспертные интервью никак не отмечены в URL, а просто лежат в разделе \textit{materials}. 
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{ПостНаука. Форматы}
+\begin{itemize}
+	\item короткие видео-лекции с расшифровками
+	\item FAQ — тексты, созданные на основе интервью, но оформленные как монологии
+    \item talks — интервью «за жизнь» 
+	\item longreads — статьи и отрывки из книг
+	\item подборки книг и фильмов
+    \item микроформаты — тесты, мультфильмы
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ПостНаука. Структура}
+\begin{itemize}
+	\item есть рубрикатор по URL
+	\item есть разбивка по темам
+    \item есть разбивка по "проектам" (главы отделенные от статей), но это не отображено в урлах
+	\item почти все материалы — «прямая речь», в остальных случаях лишнее можно отсечь за счет специального оформление
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Элементы (?)}
+\begin{itemize}
+	\item много новостей
+	\item но кто их автор — не всегда понятно
+    \item очень много энциклопедических разделов — календарь, библиотека, "масштабы", и так далее
+	\item большинство материалов —тексты без каких-либо цитат, отсылок, и комментариев
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Предварительный анализ источников}
+\begin{enumerate}
+   \item \textbf{8 источников} \\
+   		N + 1, ProScience, Geektimes, Чердак, ПостНаука, Элементы, Полит.ру, Индикатор
+	\item Контент сайтов
+    	\begin{itemize}
+   		\item Новости науки
+        \item Longreads - оригинальные статьи
+        \item Лекции
+        \item Интервью с экспертами
+        \item Переводы статей
+        \end{itemize}
+    \item Структура
+    	\begin{itemize}
+        \item Разная рубрикация
+        \item Разные способы кодировки значимой информации (рубрики, экспертные комментарии ученых)
+        \item Комментарии, рейтинги
+        \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Вопросы}
+\begin{itemize}
+	\item Нужно ли использовать переводные статьи? \\Научные новости? \\Отрывки из книг?
+    \item Как разграничивать новости и монологи ученых?
+    \item Получение данных (редакторы, автоматические обращения к сайтам, API)
+\end{itemize}
+\end{frame}
+
+\section{Дальнейшие действия}
+
+\begin{frame}{Что дальше?}
+\begin{figure}
+\includegraphics[height=6cm]{zhdun.jpg}
+\end{figure}
+\textbf{Ждем текстов, учимся выкачивать сайты.}
+	
+
+\end{frame}
+
+\begin{frame}{Спасибо за внимание!}
+\begin{figure}
+\includegraphics[height=6cm]{zhdun.jpg}
+\end{figure}
+\end{frame}
+
+
+
+	
+
+% \subsection{Tables and Figures}
+
+% \begin{frame}{Tables and Figures}
+
+% \begin{itemize}
+% \item Use \texttt{tabular} for basic tables --- see Table~\ref{tab:widgets}, for example.
+% \item You can upload a figure (JPEG, PNG or PDF) using the files menu. 
+% \item To include it in your document, use the \texttt{includegraphics} command (see the comment below in the source code).
+% \end{itemize}
+
+% Commands to include a figure:
+%\begin{figure}
+%\includegraphics[width=\textwidth]{your-figure's-file-name}
+%\caption{\label{fig:your-figure}Caption goes here.}
+%\end{figure}
+
+% \begin{table}
+% \centering
+% \begin{tabular}{l|r}
+% Item & Quantity \\\hline
+% Widgets & 42 \\
+% Gadgets & 13
+% \end{tabular}
+% \caption{\label{tab:widgets}An example table.}
+% \end{table}
+
+% \end{frame}
+
+% \subsection{Mathematics}
+
+% \begin{frame}{Readable Mathematics}
+
+% Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
+% $$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
+%       = \frac{1}{n}\sum_{i}^{n} X_i$$
+% denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
+
+% \end{frame}
+
+\end{document}

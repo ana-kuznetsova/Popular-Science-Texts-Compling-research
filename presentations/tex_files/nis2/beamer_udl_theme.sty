@@ -1,0 +1,108 @@
+%%% beamertheme.sty --- 
+%% 
+%% Filename: beamertheme.sty
+%% Description: beamer theme
+%% Author: Amine Najahi amine.najahi@univ-perp.fr
+%% Maintainer: Amine Najahi amine.najahi@univ-perp.fr
+%% Created: Tue Jan 31 13:09:02 2012 (+0100)
+%% Version: 1
+%% Last-Updated: Tue Jan 31 13:12:49 2012 (+0100)
+%%           By: Amine Najahi
+%%     Update #: 2
+%% URL: http://perso.univ-perp.fr/mohamedamine.najahi
+%% Keywords: beamer theme with UPVD colors
+%% Compatibility: 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Commentary: 
+%% You may need the package texlive-latex-extra to use textpos
+%% 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Change Log:
+%% 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% This program is free software; you can redistribute it and/or
+%% modify it under the terms of the GNU General Public License as
+%% published by the Free Software Foundation; either version 3, or
+%% (at your option) any later version.
+%% 
+%% This program is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+%% General Public License for more details.
+%% 
+%% You should have received a copy of the GNU General Public License
+%% along with this program; see the file COPYING.  If not, write to
+%% the Free Software Foundation, Inc., 51 Franklin Street, Fifth
+%% Floor, Boston, MA 02110-1301, USA.
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%% Code:
+
+
+%\usepackage[absolute,showboxes,overlay]{textpos}
+
+%\textblockorigin{2mm}{8mm}                                    % origine des positions pour placer les textblocks
+
+% * * * * * * * * * * * * * * *  LES BLOCKS * * * * * * * * * * * * * * * * * *
+\setbeamertemplate{blocks}[rounded][shadow=true]              % blocks arrondis
+
+% * * * * * * * * * * * * * DETAILS DE STYLE  * * * * * * * * * * * * * * * * *
+%\beamertemplatetransparentcovered                            
+
+\setbeamertemplate{itemize item}[ball]                        % style item
+\setbeamertemplate{itemize subitem}[triangle]                 % style subitem
+
+\mode<presentation>
+
+\definecolor{grisupvd}{rgb}{0.67,0.67,0.67}
+
+\definecolor{blackudl}{rgb}{0,0,0}
+
+\definecolor{grisfon}{rgb}{0.29,0.29,0.29}
+
+\definecolor{grisfonce}{rgb}{0.27,0.35,0.3}
+
+\setbeamercolor{section in toc}{fg=black,bg=white}
+
+\setbeamercolor{normal text}{bg=white,fg=black}
+
+\setbeamercolor{structure}{fg=black}
+
+\setbeamercolor{alerted text}{fg=red}
+
+\setbeamercolor*{palette primary}{fg=yellow,bg=grisfon}
+
+\setbeamercolor*{palette secondary}{fg=white,bg=grisupvd}
+
+\setbeamercolor*{palette tertiary}{fg=white,bg=blackudl}
+
+\setbeamercolor*{palette quaternary}{fg=white,bg=grisfon}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+\setbeamercolor{frametitle}{bg=grisfon,fg=yellow}
+
+\setbeamercolor*{separation line}{}
+
+\setbeamercolor*{fine separation line}{}
+
+\setbeamercolor{block title}{bg=grisfon,fg=white}
+
+\setbeamercolor{block body}{bg=white,fg=black}
+
+\setbeamercolor{block title example}{bg=grisfon,fg=white}
+
+\setbeamercolor{block body example}{bg=white,fg=black}
+
+\setbeamercolor{block title alerted}{bg=grisupvd,fg=white}
+
+\setbeamercolor{block body alerted}{bg=white,fg=black}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% beamertheme.sty ends here
