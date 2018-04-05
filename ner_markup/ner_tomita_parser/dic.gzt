@@ -10,13 +10,18 @@ TAuxDicArticle "имена_ученых"
     key = { "tomita:sci_names.cxx" type=CUSTOM }
 }
 
-TAuxDicArticle "статус_ученых"
+TAuxDicArticle "scholar_status"
 {
     key = { "sci_status.txt" type=FILE }
 }
 
-TAuxDicArticle "действия_ученых"
+TAuxDicArticle "scholar_action"
 {
     key = { "action_verbs.txt" type=FILE }
+}
+
+TAuxDicArticle "institution"
+{
+    key = "университет" | "институт" | "лаборатория" | "компания" 
 }
 
