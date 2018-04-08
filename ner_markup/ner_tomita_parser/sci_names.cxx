@@ -13,8 +13,8 @@ Scholar ->  (Adj<gnc-agr[1]>) (Status<gnc-agr[1]>) ProperName<gnc-agr[1], rt> (S
 
 //Define actions going after the scholar's name
 Action -> Verb<kwtype='scholar_action'> ;
-Action_pres_sg -> Action<gram='praes, 3p, sg'> ;
-Action_past_sg -> Action<gram='praet, 3p, sg'> | Action<gram='aor, 3p, sg'> ; //Uresolved past tense
+Action_pres_sg -> Action<gram='praes,3p,sg'> ;
+Action_past_sg -> Action<gram='praet,sg'> ;
 Action_type -> Action_pres_sg | Action_past_sg ;
 
 
@@ -30,6 +30,5 @@ Institution -> 'из' (Adj<gnc-agr[1]>+) Noun<kwtype='institution', gram='gen', 
             (Adj<gnc-agr[1]>+) Noun<kwtype='institution', gram='gen', rt, gnc-agr[1]>
             (Location+);
 
-Affiliation -> Institution ;
 
-S -> Scholar (Affiliation) (Action_type) ;
+S -> Scholar (Institution) (Action_type) ;
