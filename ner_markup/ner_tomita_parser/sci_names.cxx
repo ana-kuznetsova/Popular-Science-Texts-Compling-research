@@ -14,15 +14,21 @@ AbrName ->  Word<h-reg1> Initials | Word<h-reg1, gram='f'> Initials |
 //Define scholar status
 Status -> Noun<kwtype='scholar_status'>;
 
-//Scholars' names could be found with their title before the name 
+//Define Scholar non-terminal
 
 Scholar ->  (Adj<gnc-agr[1]>) Status<gnc-agr[1]> ProperName<gnc-agr[1], rt> |
             (Adj<gnc-agr[1]>) ProperName<gnc-agr[1], rt> Status<gnc-agr[1]> |           
             Citation |
             ProperName Action_type |
-            //feminitive agreement
+            //feminitive agreement with ProperName
              (Adj<fem-c-agr[1]>) Status<fem-c-agr[1]> ProperName<fem-c-agr[1], rt>| 
-             (Adj<fem-c-agr[1]>) ProperName<fem-c-agr[1], rt> Status<fem-c-agr[1]>
+             (Adj<fem-c-agr[1]>) ProperName<fem-c-agr[1], rt> Status<fem-c-agr[1]>|
+             //Abbreviated names 
+            (Adj<gnc-agr[1]>) Status<gnc-agr[1]> AbrName<gnc-agr[1], rt> |
+            (Adj<gnc-agr[1]>) AbrName<gnc-agr[1], rt> Status<gnc-agr[1]> |
+            //Abbreviated fem names
+            (Adj<fem-c-agr[1]>) Status<fem-c-agr[1]> AbrName<fem-c-agr[1], rt>| 
+            (Adj<fem-c-agr[1]>) AbrName<fem-c-agr[1], rt> Status<fem-c-agr[1]>
             ; 
 
 //Define scholars plural contexts
@@ -33,8 +39,14 @@ Scholars_pl -> Scholar (Institution) 'и' Scholar (Institution) |
                Citation_pl|
                ProperName 'и' ProperName Action_type Noun<gram='ins'>|
                Noun<gram='ins'> Action_type ProperName 'и' ProperName|
-               Noun<gram='ins'> Action_type ProperName Scholar (Institution) 'и' Scholar (Institution)|
-               Scholar (Institution) 'и' Scholar (Institution) Noun<gram='ins'> Action_type ;
+               Noun<gram='ins'> Action_type Scholar (Institution) 'и' Scholar (Institution)|
+               Scholar (Institution) 'и' Scholar (Institution) Noun<gram='ins'> Action_type|
+               //Abbreviated names
+               (Adj<gnc-agr[1]>) Status<gram='pl', gnc-agr[1]> (Institution) AbrName 'и' AbrName|
+               AbrName 'и' AbrName Action_type|
+               Action_type AbrName 'и' AbrName|
+               AbrName 'и' AbrName Action_type Noun<gram='ins'>|
+               Noun<gram='ins'> Action_type AbrName 'и' AbrName ;
 
 //Define actions going after the scholar's name
 Action -> Verb<kwtype='scholar_action'> ;
@@ -83,5 +95,5 @@ Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='ge
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,sg'> (Institution) |
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,pl'> (Institution);
 
-//S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) ;
-S -> AbrName;
+S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) ;
+//S -> AbrName;

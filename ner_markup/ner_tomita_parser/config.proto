@@ -3,7 +3,7 @@ TTextMinerConfig {
   Dictionary = "dic.gzt"; // путь к корневому словарю
   PrettyOutput = "PrettyOutput.html"; // путь к файлу с отладочным выводом в удобном для чтения виде
   Input = {
-    File = "text1.txt"; // путь к входному файлу
+    File = "text2.txt"; // путь к входному файлу
   }
   Articles = [
     { Name = "имена_ученых" } // название статьи в корневом словаре,
