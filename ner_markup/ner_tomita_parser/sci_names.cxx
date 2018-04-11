@@ -5,6 +5,12 @@
 //Define Names  
 ProperName ->  Word<h-reg1>+ |  Word<h-reg1, gram='f'>+ ; 
 
+//Define names with initials (abbreviated name)
+Initial -> AnyWord<wff=/[А-ЯЁ]\./> ;
+Initials -> Initial+ ;
+AbrName ->  Word<h-reg1> Initials | Word<h-reg1, gram='f'> Initials |
+            Initials  Word<h-reg1> | Initials Word<h-reg1, gram='f'> ;
+
 //Define scholar status
 Status -> Noun<kwtype='scholar_status'>;
 
@@ -77,4 +83,5 @@ Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='ge
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,sg'> (Institution) |
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,pl'> (Institution);
 
-S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) ;
+//S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) ;
+S -> AbrName;
