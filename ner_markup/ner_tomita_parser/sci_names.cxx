@@ -76,10 +76,13 @@ Pro -> Word<gram='APRO,abl'> ;
 
 //Define Date
 Year -> 'в' AnyWord<wff=/[1-2]?[0-9]{1,3}г?\.?/> ('год' <gram='sg,dat'>);
-Century -> 'в' AnyWord<wff=/[1-2]?[0-9]{1,3}/> ('век' <gram='sg,abl'>)|
-          'в' AnyWord<wff=/(XC|XL|X{0,3})(IX|IV|V?I{0,3})в?\.?/> ;
-Date -> Year | Century ; //Correct splitter for abbreviated dates 
 
+Century -> 'в' AnyWord<wff=/[1-2]?[0-9]{1,3}/> ('век' <gram='sg,abl'>)|
+           'в' AnyWord<wff=/(XC|XL|X{0,3})(IX|IV|V?I{0,3})в?\.?/> ('век' <gram='sg,abl'>)|
+           AnyWord<wff=/[1-2]?[0-9]{1,3}/> ('век' <gram='sg,gen'>)|
+           AnyWord<wff=/(XC|XL|X{0,3})(IX|IV|V?I{0,3})в?\.?/> ('век' <gram='sg,gen'>) ;
+
+Date -> Year | Century ; //Correct splitter for abbreviated dates 
 
 //Citation
 Citation -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='gen, sg'> (Institution) |
@@ -98,11 +101,27 @@ Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='ge
                ProperName<gram='gen, sg'> (Institution)|
                'в' Noun<kwtype='citation', gram='abl,sg'>  ProperName<gram='gen,sg'> (Institution) 'и'
                ProperName<gram='gen, sg'> (Institution)|
-               ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,sg'> (Institution) |
-               ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,pl'> (Institution);
+               
+               ProperName 'и' ProperName 'в' (Pro) Noun<kwtype='citation', gram='abl,sg'> (Institution) |
+               ProperName 'и' ProperName 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> (Institution);
+
+//Define term introduction 
+Term -> Noun<gram='nom'> ('впервые') (Verb<gram='praet'>) Word<gram='V,brev'> ProperName<gram='ins'> |
+        Noun<gram='nom'> (Verb<gram='praet'>) Word<gram='V,brev'> ('впервые') ProperName<gram='ins'> |
+        Noun<gram='nom'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'> ProperName<gram='ins'> |
+        ProperName<gram='ins'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'>  Noun<gram='nom'>
+        ;
+
+TermIntroduction -> Term Date | Date Term ;
+
+//Define greatest scientisits
+GreatestSch -> ProperName (Verb<gram='praet'>) Word<gram='ANUM,ins'> 'из'
+               Adj<gram='supr'> Status Date |
+               Word<gram='ANUM,nom'> 'из' Adj<gram='supr'> Status Date ProperName |
+               ProperName Word<gram='ANUM,nom'> 'из' Adj<gram='supr'> Status Date;
 
 S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) |
-     Date Scholar (Institution) | Date Scholars_pl (Institution) ;
+     Date Scholar (Institution) | Date Scholars_pl (Institution) | TermIntroduction | GreatestSch ;
 
-//S -> Citation ;
+//S -> GreatestSch  ;
 
