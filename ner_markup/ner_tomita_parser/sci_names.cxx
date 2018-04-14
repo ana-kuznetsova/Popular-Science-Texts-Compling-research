@@ -54,7 +54,7 @@ Action_pres_sg -> Action<gram='praes,sg'> ;
 Action_past_sg -> Action<gram='praet,sg'> ;
 Action_pres_pl -> Action<gram='praes,pl'> ;
 Action_past_pl -> Action<gram='praet,pl'> ;
-Action_type -> Action_pres_sg | Action_past_sg
+Action_type -> Action_pres_sg | Action_past_sg |
                Action_pres_pl | Action_past_pl ;
 
 
@@ -71,8 +71,15 @@ Institution -> 'из' (Adj<gnc-agr[1]>+) Noun<kwtype='institution', gram='gen', 
             Abbreviation;
 
 
-//Define Pronouns
-Pro -> Word<gram='SPRO'> ;
+//Define Possessive Pronouns
+Pro -> Word<gram='APRO,abl'> ;
+
+//Define Date
+Year -> 'в' AnyWord<wff=/[1-2]?[0-9]{1,3}г?\.?/> ('год' <gram='sg,dat'>);
+Century -> 'в' AnyWord<wff=/[1-2]?[0-9]{1,3}/> ('век' <gram='sg,abl'>)|
+          'в' AnyWord<wff=/(XC|XL|X{0,3})(IX|IV|V?I{0,3})в?\.?/> ;
+Date -> Year | Century ; //Correct splitter for abbreviated dates 
+
 
 //Citation
 Citation -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='gen, sg'> (Institution) |
@@ -80,9 +87,8 @@ Citation -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='gen, 
             Noun<kwtype='citation', gram='nom,sg'> ProperName<gram='gen,sg'> (Institution)|
             'в' Noun<kwtype='citation', gram='abl,sg'>  ProperName<gram='gen,sg'> (Institution)|
 
-            //Unresolved with pro in citations
-            ProperName 'в'(Pro) Noun<kwtype='citation', gram='abl,sg'> (Institution) |
-            ProperName 'в' Noun<kwtype='citation', gram='abl,pl'> (Institution);
+            ProperName 'в'(Pro) Noun<kwtype='citation', gram='abl,sg'> |
+            ProperName 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> ;
 
 Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='gen, sg'> (Institution) 
                'и' ProperName<gram='gen, sg'> (Institution) |
@@ -95,5 +101,8 @@ Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> ProperName<gram='ge
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,sg'> (Institution) |
                ProperName 'и' ProperName 'в' Noun<kwtype='citation', gram='abl,pl'> (Institution);
 
-S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) ;
-//S -> AbrName;
+S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) |
+     Date Scholar (Institution) | Date Scholars_pl (Institution) ;
+
+//S -> Citation ;
+
