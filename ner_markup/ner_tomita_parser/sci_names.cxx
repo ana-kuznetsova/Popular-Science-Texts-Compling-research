@@ -3,7 +3,7 @@
 
  
 //Define Names  
-ProperName ->  Word<h-reg1>+ |  Word<h-reg1, gram='f'>+ ; 
+ProperName ->  Word<~fw, h-reg1>+ |  Word<~fw, h-reg1, gram='f'>+ ; 
 
 //Define names with initials (abbreviated name)
 Initial -> AnyWord<wff=/[А-ЯЁ]\./> ;
@@ -16,19 +16,19 @@ Status -> Noun<kwtype='scholar_status'>;
 
 //Define Scholar non-terminal
 
-Scholar ->  (Adj<gnc-agr[1]>) Status<gnc-agr[1]> ProperName<gnc-agr[1], rt> |
-            (Adj<gnc-agr[1]>) ProperName<gnc-agr[1], rt> Status<gnc-agr[1]> |           
+Scholar ->  (Adj<gnc-agr[1]>) Status<gnc-agr[1], gram='sg'> ProperName<gnc-agr[1], rt> |
+            (Adj<gnc-agr[1]>) ProperName<gnc-agr[1], rt> Status<gnc-agr[1], gram='sg'> |           
             Citation |
             ProperName Action_type |
             //feminitive agreement with ProperName
-             (Adj<fem-c-agr[1]>) Status<fem-c-agr[1]> ProperName<fem-c-agr[1], rt>| 
-             (Adj<fem-c-agr[1]>) ProperName<fem-c-agr[1], rt> Status<fem-c-agr[1]>|
+             (Adj<fem-c-agr[1]>) Status<fem-c-agr[1], gram='sg'> ProperName<fem-c-agr[1], rt>| 
+             (Adj<fem-c-agr[1]>) ProperName<fem-c-agr[1], rt> Status<fem-c-agr[1], gram='sg'>|
              //Abbreviated names 
-            (Adj<gnc-agr[1]>) Status<gnc-agr[1]> AbrName<gnc-agr[1], rt> |
-            (Adj<gnc-agr[1]>) AbrName<gnc-agr[1], rt> Status<gnc-agr[1]> |
+            (Adj<gnc-agr[1]>) Status<gnc-agr[1], gram='sg'> AbrName<gnc-agr[1], rt> |
+            (Adj<gnc-agr[1]>) AbrName<gnc-agr[1], rt> Status<gnc-agr[1], gram='sg'> |
             //Abbreviated fem names
-            (Adj<fem-c-agr[1]>) Status<fem-c-agr[1]> AbrName<fem-c-agr[1], rt>| 
-            (Adj<fem-c-agr[1]>) AbrName<fem-c-agr[1], rt> Status<fem-c-agr[1]>
+            (Adj<fem-c-agr[1]>) Status<fem-c-agr[1], gram='sg'> AbrName<fem-c-agr[1], rt>| 
+            (Adj<fem-c-agr[1]>) AbrName<fem-c-agr[1], rt> Status<fem-c-agr[1], gram='sg'>
             ; 
 
 //Define scholars plural contexts
@@ -39,6 +39,8 @@ Scholars_pl -> Scholar (Institution) 'и' Scholar (Institution) |
                Citation_pl|
                ProperName 'и' ProperName Action_type Noun<gram='ins'>|
                Noun<gram='ins'> Action_type ProperName 'и' ProperName|
+               Action_type Noun<gram='ins'> Scholar (Institution) 'и' Scholar (Institution)|
+               Action_type Noun<gram='ins'> ProperName 'и' ProperName|
                Noun<gram='ins'> Action_type Scholar (Institution) 'и' Scholar (Institution)|
                Scholar (Institution) 'и' Scholar (Institution) Noun<gram='ins'> Action_type|
                //Abbreviated names
@@ -120,8 +122,21 @@ GreatestSch -> ProperName (Verb<gram='praet'>) Word<gram='ANUM,ins'> 'из'
                Word<gram='ANUM,nom'> 'из' Adj<gram='supr'> Status Date ProperName |
                ProperName Word<gram='ANUM,nom'> 'из' Adj<gram='supr'> Status Date;
 
-S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) |
-     Date Scholar (Institution) | Date Scholars_pl (Institution) | TermIntroduction | GreatestSch ;
+// Define prize context
+Prize -> ProperName 'лауреат'<gnc-agr[1], rt> Adj<gnc-agr[1]> 'премия'<gram='gen,sg', gnc-agr[1]> |
+        'лауреат'<gnc-agr[1], rt> Adj<gnc-agr[1]> 'премия'<gram='gen,sg', gnc-agr[1]> ProperName|
+        Scholar (Institution) 'лауреат'<gnc-agr[1], rt> Adj<gnc-agr[1]> 'премия'<gram='gen,sg', gnc-agr[1]> |
+        'лауреат'<gnc-agr[1], rt> Adj<gnc-agr[1]> 'премия'<gram='gen,sg', gnc-agr[1]> Scholar (Institution) |
+        ProperName Action_type Adj<gnc-agr[1]> 'премия'<gram='acc,sg', gnc-agr[1]>|
+        Scholar (Institution) Action_type Adj<gnc-agr[1]> 'премия'<gram='acc,sg', gnc-agr[1]>;
 
-//S -> GreatestSch  ;
+
+S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) |
+    (Action_type) Scholars_pl (Institution) |
+     Date Scholar (Institution) | Date Scholars_pl (Institution) | TermIntroduction | GreatestSch |
+     Prize ;
+
+
+//S -> Prize;
+
 
