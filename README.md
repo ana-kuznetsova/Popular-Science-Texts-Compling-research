@@ -69,7 +69,7 @@ Is this true that popular scientific texts are more readable than academic?
 8. N+1: http://nplus1.ru/
 
 
-## Rubrics ##
+## Metadata&Rubrics ##
 Final metatable with unique rubric assigned to each text  - https://github.com/ana-kuznetsova/Popular-Science-Texts-Compling-research/blob/master/metadata/meta_rubrics_final.tsv
 
 ## Team & contacts ##
