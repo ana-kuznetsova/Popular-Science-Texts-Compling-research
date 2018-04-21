@@ -1,0 +1,10 @@
+import "base.proto";
+import "facttypes_base.proto"; 
+
+
+message Person :  NFactType.TFact 
+{
+    optional string Name = 1 [(NFactType.normcase) = CAMEL_CASE];
+    optional string Status =2 ;
+
+}

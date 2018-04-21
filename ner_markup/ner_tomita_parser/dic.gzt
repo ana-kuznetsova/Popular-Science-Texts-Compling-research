@@ -1,11 +1,11 @@
 encoding "utf8";               // указываем кодировку, в которой написан этот файл
 import "base.proto";           // подключаем описания protobuf-типов (TAuxDicArticle и прочих)
 import "articles_base.proto";  // Файлы base.proto и articles_base.proto встроены в компилятор.
-
+import "facttypes.proto";
 
                                // Их необходимо включать в начало любого gzt-словаря.
 // статья с нашей грамматикой:
-TAuxDicArticle "имена_ученых"
+TAuxDicArticle "sci_names"
 {
     key = { "tomita:sci_names.cxx" type=CUSTOM }
 }
@@ -22,6 +22,12 @@ TAuxDicArticle "scholar_action"
 
 TAuxDicArticle "institution"
 {
-    key = "университет" | "институт" | "лаборатория" | "компания" 
+    key = "университет" | "институт" | "лаборатория" | "компания" | "центр" 
 }
+
+TAuxDicArticle "citation"
+{
+    key = "слово" | "книга" | "статья" | "доклад" |"работа"
+}
+
 
