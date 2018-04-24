@@ -1,12 +1,15 @@
 encoding "utf8"; // указываем кодировку, в которой написан конфигурационный файл
 TTextMinerConfig {
   Dictionary = "dic.gzt"; // путь к корневому словарю
-  PrettyOutput = "PrettyOutput.html"; // путь к файлу с отладочным выводом в удобном для чтения виде
+  PrettyOutput = "evaluation.html"; // путь к файлу с отладочным выводом в удобном для чтения виде
   Input = {
-    File = "text2.txt"; // путь к входному файлу
+    Dir = "sci_names_eval"; // путь к входному файлу
   }
   Articles = [
-    { Name = "имена_ученых" } // название статьи в корневом словаре,
+    { Name = "sci_names" } // название статьи в корневом словаре,
                                           // которая содержит запускаемую грамматику
   ]
+  PrintRules="rules.txt";
+  Facts = [
+    { Name = "Person" }]
 }

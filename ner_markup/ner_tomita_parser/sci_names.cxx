@@ -4,7 +4,7 @@
  
 //Define Names  
 //ProperName ->  Word<h-reg1>+ |  Word<h-reg1, gram='f'>+ ; 
-Name -> Word<wfm=/[А-Я][а-я-]+/> ;
+Name -> Word<wfm=/[А-Я][а-я-]+/>;
 ProperName -> Name+ ;
 Person -> ProperName<~fw> interp (Person.Name::not_norm) ;
 
