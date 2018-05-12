@@ -24,11 +24,16 @@ Specialist -> 'специалист' 'по' (Adj<gnc-agr[1]>) Noun<gnc-agr[1], g
 Department -> 'сотрудник' 'кафедра'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> |
               'сотрудник' 'кафедра'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> 'и'
               (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> ;
+Institute -> 'сотрудник' 'институт'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> |
+             'сотрудник' 'институт'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> 'и'
+             (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> |
+             'сотрудник' 'институт'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> 'РАН' ;
 
 //Define scholar status
 Status -> Noun<kwtype='scholar_status'> interp (Person.Status) |
           Specialist interp (Person.Status) |
-          Department interp (Person.Status) ;
+          Department interp (Person.Status) |
+          Institute interp (Person.Status) ;
 
 
         
