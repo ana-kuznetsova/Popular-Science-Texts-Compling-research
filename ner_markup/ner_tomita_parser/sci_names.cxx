@@ -173,7 +173,8 @@ Term -> Noun<gram='nom'> ('впервые') (Verb<gram='praet'>) Word<gram='V,br
         Noun<gram='nom'> (Verb<gram='praet'>) Word<gram='V,brev'> ('впервые') Person<gram='ins'> |
         Noun<gram='nom'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'> Person<gram='ins'> |
         Person<gram='ins'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'>  Noun<gram='nom'>
-        //'понятие'<gram='nom'> (Noun<gram='gen'>) ('впервые') Word<gram='partcp'> Person<gram='ins'>
+        'понятие'<gnc-agr[1], rt, gram='nom'> (Noun<gram='gen'>) ('впервые') 'вводить'<gnc-agr[1]>
+        (Status<gram='gen'>) Person<gram='ins'>
         ;
 
 TermIntroduction -> Term Date | Date Term ;
