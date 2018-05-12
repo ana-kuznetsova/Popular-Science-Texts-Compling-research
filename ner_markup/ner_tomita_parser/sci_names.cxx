@@ -6,7 +6,7 @@
 //ProperName ->  Word<h-reg1>+ |  Word<h-reg1, gram='f'>+ ; 
 Name -> Word<wfm=/[А-Я][а-я-]+/>;
 ProperName -> Name+ ;
-Person -> ProperName<~fw> interp (Person.Name::not_norm) ;
+Person -> ProperName interp (Person.Name::not_norm) ;
 
 
 
@@ -17,15 +17,33 @@ AbrName ->  Word<h-reg1> Initials | Word<h-reg1, gram='f'> Initials |
             Initials  Word<h-reg1> | Initials Word<h-reg1, gram='f'> ;
 AbbreviatedName -> AbrName interp (Person.Name) ;
 
-//Define scholar status
-Status -> Noun<kwtype='scholar_status'> interp (Person.Status);
+Specialist -> 'специалист' 'по' (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='dat'> |
+              'специалист' 'по' (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='dat'> 'и' 
+              (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='dat'>  ;
 
+Department -> 'сотрудник' 'кафедра'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> |
+              'сотрудник' 'кафедра'<gram='gen'> (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> 'и'
+              (Adj<gnc-agr[1]>) Noun<gnc-agr[1], gram='gen'> ;
+
+//Define scholar status
+Status -> Noun<kwtype='scholar_status'> interp (Person.Status) |
+          Specialist interp (Person.Status) |
+          Department interp (Person.Status) ;
+
+
+        
 //Define Scholar non-terminal
 
 Scholar ->  (Adj<gnc-agr[1]>) Status<gnc-agr[1], gram='sg'> Person<gnc-agr[1], rt> |
             (Adj<gnc-agr[1]>) Person<gnc-agr[1], rt> Status<gnc-agr[1], gram='sg'> |           
             Citation |
             Person Action_type |
+            Person 'стать'<gram='praet'> Adj<kwtype='famous', gnc-agr[1]> Status<gnc-agr[1], 
+            gram='ins'> |
+            // Адронный коллайдер разработал Х
+            Noun<gram='acc'> Action_type (Status)  (Institution) Person<gram='nom'> |
+            (Status) Person 'дать'<gram='praet'> 'оценка'<gram='acc'> Noun<gram='dat'> |
+            Person 'который' Action_type Noun<gram='ins'> |
             //feminitive agreement with ProperName
              (Adj<fem-c-agr[1]>) Status<fem-c-agr[1], gram='sg'> Person<fem-c-agr[1], rt>| 
              (Adj<fem-c-agr[1]>) Person<fem-c-agr[1], rt> Status<fem-c-agr[1], gram='sg'>|
@@ -34,8 +52,27 @@ Scholar ->  (Adj<gnc-agr[1]>) Status<gnc-agr[1], gram='sg'> Person<gnc-agr[1], r
             (Adj<gnc-agr[1]>) AbbreviatedName<gnc-agr[1], rt> Status<gnc-agr[1], gram='sg'> |
             //Abbreviated fem names
             (Adj<fem-c-agr[1]>) Status<fem-c-agr[1], gram='sg'> AbbreviatedName<fem-c-agr[1], rt>| 
-            (Adj<fem-c-agr[1]>) AbbreviatedName<fem-c-agr[1], rt> Status<fem-c-agr[1], gram='sg'>
+            (Adj<fem-c-agr[1]>) AbbreviatedName<fem-c-agr[1], rt> Status<fem-c-agr[1], gram='sg'>|
+            'исследователь'<gram='pl'>  'под' 'руководство'<gram='ins'> (Status<gram='gen'>) 
+            Person<gram='gen'> |
+            'группа' 'исследователь'<gram='gen'> 'под' 'руководство'<gram='ins'> (Status<gram='gen'>)
+            Person<gram='gen'>|
+            'заслуга' (Status<gram='gen'>) Person<gram='gen'>  'состоять' 'в' 
+            Noun<gram='abl'>
             ; 
+
+//Define results
+Results -> 'исследование' (Status) (Institution) Person<gram='gen'> 'показать' 'что'<gram='CONJ'> |
+           'исследование' (Status) (Institution) Person<gram='gen'> 'и' (Status) (Institution) 
+            Person<gram='gen'> 'показать' 'что'<gram='CONJ'> |
+            'исследование' (Status) (Institution) Person<gram='gen'> 'показывать' 'что'<gram='CONJ'>
+            'исследование' (Status) (Institution) Person<gram='gen'> 'и' (Status) (Institution) 
+            Person<gram='gen'> 'показывать' 'что'<gram='CONJ'> |
+            'исследование' (Status) (Institution) Person<gram='gen'> 'позволить' Word<gram='inf'> |
+            'благодаря' 'такой'<gram='dat,pl'> Status<gram='pl,dat'> 'как'<gram='CONJ'> Person 'и' Person |
+            'благодаря' 'такой'<gram='dat,sg'> Status<gram='sg,dat'> 'как'<gram='CONJ'> Person|
+            'благодаря' (Status<gram='dat,pl'>) (Institution) Person<gram='dat,sg'> 'и' Person<gram='dat,sg'>|
+            'благодаря' (Status<gram='dat,sg'>) (Institution) Person<gram='dat,sg'>  ;
 
 //Define scholars plural contexts
 Scholars_pl -> Scholar (Institution) 'и' Scholar (Institution) |
@@ -43,7 +80,9 @@ Scholars_pl -> Scholar (Institution) 'и' Scholar (Institution) |
                Person 'и' Person Action_type<gram='pl'>|
                Action_type<gram='pl'> Person 'и' Person|
                Citation_pl|
+               Noun<gram='acc'> Action_type<gram='pl'> (Status)  (Institution) Person<gram='nom'> 'и' Person<gram='nom'> |
                Person 'и' Person Action_type Noun<gram='ins'>|
+               Person 'и' Person 'который'<gram='pl'> Action_type Noun<gram='ins'> |
                Noun<gram='ins'> Action_type Person 'и' Person|
                Action_type Noun<gram='ins'> Scholar (Institution) 'и' Scholar (Institution)|
                Action_type Noun<gram='ins'> Person 'и' Person|
@@ -98,7 +137,14 @@ Citation -> 'по' Noun<kwtype='citation', gram='dat,pl'> Person<gram='gen, sg'>
             'в' Noun<kwtype='citation', gram='abl,sg'>  Person<gram='gen,sg'> (Institution)|
 
             Person 'в'(Pro) Noun<kwtype='citation', gram='abl,sg'> |
-            Person 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> ;
+            Person 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> |
+            'идея'<gram='pl'> (Status<gram='gen'>) Person<gram='gen'>   Verb<kwtype='citation_verbs'> Person |
+            'идея' (Status<gram='gen'>) Person<gram='gen'> 'состоять'<gram='praet'> 'в' |
+            'идея' (Status<gram='gen'>) Person<gram='gen'> 'состоять'<gram='praes'> 'в' |
+            Noun<gnc-agr[1], rt> 'описать'<gnc-agr[1]> 'у' (Status) Person<gram='gen'> | 
+            Noun<gnc-agr[1], rt> 'описать'<gnc-agr[1]> (Status) Person<gram='ins'>
+            
+              ;
 
 Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> Person<gram='gen, sg'> (Institution) 
                'и' Person<gram='gen, sg'> (Institution) |
@@ -110,13 +156,24 @@ Citation_pl -> 'по' Noun<kwtype='citation', gram='dat,pl'> Person<gram='gen, s
                Person<gram='gen, sg'> (Institution)|
                
                Person 'и' Person 'в' (Pro) Noun<kwtype='citation', gram='abl,sg'> (Institution) |
-               Person 'и' Person 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> (Institution);
+               Person 'и' Person 'в' (Pro) Noun<kwtype='citation', gram='abl,pl'> (Institution)|
+               'идея' (Status<gram='gen'>) Person<gram='gen'> 'и' (Status<gram='gen'>)
+                Person<gram='gen'> 'состоять'<gram='praet'> 'в'|
+               'идея' (Status<gram='gen'>) Person<gram='gen'> 'и' (Status<gram='gen'>)
+                Person<gram='gen'> 'состоять'<gram='praes'> 'в'|
+                Noun<gnc-agr[1], rt> 'описать'<gnc-agr[1]> 'у' (Status) Person<gram='gen'>  'и'
+                Person<gram='gen'>| 
+                Noun<gnc-agr[1], rt> 'описать'<gnc-agr[1]> (Status) Person<gram='ins'> 'и'
+                Person<gram='ins'>
+                
+                ;
 
 //Define term introduction 
 Term -> Noun<gram='nom'> ('впервые') (Verb<gram='praet'>) Word<gram='V,brev'> Person<gram='ins'> |
         Noun<gram='nom'> (Verb<gram='praet'>) Word<gram='V,brev'> ('впервые') Person<gram='ins'> |
         Noun<gram='nom'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'> Person<gram='ins'> |
         Person<gram='ins'> (Verb<gram='praet'>) ('впервые') Word<gram='V,brev'>  Noun<gram='nom'>
+        //'понятие'<gram='nom'> (Noun<gram='gen'>) ('впервые') Word<gram='partcp'> Person<gram='ins'>
         ;
 
 TermIntroduction -> Term Date | Date Term ;
@@ -139,9 +196,7 @@ Prize -> Person 'лауреат'<gnc-agr[1], rt> Adj<gnc-agr[1]> 'премия'<
 S -> Scholar (Institution) (Action_type) | Scholars_pl (Institution) (Action_type) |
     (Action_type) Scholars_pl (Institution) |
      Date Scholar (Institution) | Date Scholars_pl (Institution) | TermIntroduction | GreatestSch |
-     Prize ;
+     Prize | Results ;
 
-
-//S -> Prize ;
 
 
