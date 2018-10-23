@@ -1,4 +1,6 @@
 # Import modules
+print('Start')
+
 from typing import List
 import bs4 as bs
 from flashtext import KeywordProcessor
@@ -54,12 +56,12 @@ def _parse_xml(xml_output):
     xml = bs.BeautifulSoup(xml_output, 'lxml')
     names = xml.find_all('name')
     pattern = re.compile(r'val="([А-ЯЁ]+)">')
-    names_ext = []
+    names_extracted = []
     for name in names:
         name = name.get('val')
-        names_ext.append(name)
-    names_ext = [name.title() for name in names_ext]
-    return names_ext
+        names_extracted.append(name)
+    names_extracted = [name.title() for name in names_extracted]
+    return names_extracted
 
 
 def _delete_erroneous_words(names: list, kword_processor):
@@ -77,11 +79,18 @@ def _delete_erroneous_words(names: list, kword_processor):
     return potential_names
 
 
-def parse_user_text() -> str:
+def parse_user_text(user_text: str) -> List[str]:
     '''Executes the whole pipeline from xml to complete
     names list '''
     xml_output = _slurp('./tomita-parser/build/bin/names.xml')
-    return 
+    names = _parse_xml(xml_output)
+    names = _delete_erroneous_words(names, lemmas_processor)
+    names = _delete_erroneous_words(names, geo_processor)
+    for name in corpora_names:
+        if name in user_text:
+            if name not in names:
+                names.append(name)
+    return names
 
 
 # Import required files and word lists.
@@ -95,4 +104,4 @@ geo_terms = _slurp_lines('./ner_lists/geo_terms.txt')
 geo_processor = _initialize_processor(geo_terms)
 
 # Process corpora names
-corpora_names = _slurp_lines('./ner_lists/full_names_list.txt_')
+corpora_names = _slurp_lines('./ner_lists/full_names_list.txt')
