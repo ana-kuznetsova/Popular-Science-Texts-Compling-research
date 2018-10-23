@@ -155,3 +155,7 @@ _Текущий статус модулей:_
 2. 
 
 _Ссылка на код:_ 
+
+## Отслеживание статуса проекта 
+
+Отслеживание прогресса задач проекта по [ссылке](https://github.com/ana-kuznetsova/Popular-Science-Texts-Compling-research/projects/2?add_cards_query=is%3Aopen).
