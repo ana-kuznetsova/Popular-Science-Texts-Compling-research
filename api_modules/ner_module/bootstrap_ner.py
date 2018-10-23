@@ -1,5 +1,4 @@
 # Import modules
-print('Start')
 
 from typing import List
 import bs4 as bs
