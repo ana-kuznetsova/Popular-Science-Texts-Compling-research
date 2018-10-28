@@ -122,11 +122,12 @@ _Текущий статус модулей:_
 2. `readability_metrics.py` — завершен
 3. `readability_dictionary_compare` — в целом завершен; словарь терминов нуждается в обновлении
 4. `pos_tags` — завершен
+
 _Завершение работы над `python` модулями:_
 31.10.18
+
 _Ссылка на код:_ 
 [Readability-модуль](https://github.com/ana-kuznetsova/Popular-Science-Texts-Compling-research/tree/master/api_modules/rb_module)
-
 
 
 
