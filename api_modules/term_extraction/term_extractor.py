@@ -26,13 +26,13 @@ dictionary = dict(zip(lemmas, values))
 
 
 #символьные n-граммы
-with open('./filtres/ngsrms/bigrams.txt') as fl:
+with open('./filters/ngrams/bigrams.txt') as fl:
     bi = fl.read()
     
-with open('./filtres/ngsrms/trigrams.txt') as fl:
+with open('./filters/ngrams/trigrams.txt') as fl:
     tri = fl.read()
     
-with open('./filtres/ngsrms/tetragrams.txt') as fl:
+with open('./filters/ngrams/tetragrams.txt') as fl:
     tetra = fl.read()
     
 bigrams = bi.split('\n')
@@ -68,7 +68,7 @@ pref4 = p4.split('\n')
 
 
 #стоп-слова
-with open('./filters/stopwprds/stopwords.txt') as fl:
+with open('./filters/stopwords/stopwords.txt') as fl:
     SW = fl.read()
 stopwords = SW.split('\n')
 
