@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[1]:
-
-
 import pandas as pd
 import os
 from rutermextract import TermExtractor
@@ -17,11 +14,8 @@ m = Mystem()
 from numpy import array
 
 
-# In[2]:
-
-
 #частотный словарь
-df = pd.read_csv('freqrnc2011.csv', sep='\t')
+df = pd.read_csv('./filters/freqrnc2011.csv', sep='\t')
 freq_dict = df[['Lemma','Freq(ipm)']]
 sorted_freq = freq_dict.sort_values(by=['Freq(ipm)'])
 
@@ -31,17 +25,14 @@ values = list(freq_dict['Freq(ipm)'])
 dictionary = dict(zip(lemmas, values))
 
 
-# In[4]:
-
-
 #символьные n-граммы
-with open('bigrams.txt') as fl:
+with open('./filtres/ngsrms/bigrams.txt') as fl:
     bi = fl.read()
     
-with open('trigrams.txt') as fl:
+with open('./filtres/ngsrms/trigrams.txt') as fl:
     tri = fl.read()
     
-with open('tetragrams.txt') as fl:
+with open('./filtres/ngsrms/tetragrams.txt') as fl:
     tetra = fl.read()
     
 bigrams = bi.split('\n')
@@ -49,26 +40,23 @@ trigrams = tri.split('\n')
 tetragrams = tetra.split('\n')
 
 
-# In[5]:
-
-
-#'аффиксы'
-with open('suf2.txt') as fl:
+#части слова
+with open('./filters/word_parts/suf2.txt') as fl:
     s2 = fl.read()
 
-with open('suf3.txt') as fl:
+with open('./filters/word_parts/suf3.txt') as fl:
     s3 = fl.read()
     
-with open('suf4.txt') as fl:
+with open('./filters/word_parts/suf4.txt') as fl:
     s4 = fl.read()
 
-with open('pref2.txt') as fl:
+with open('./filters/word_parts/pref2.txt') as fl:
     p2 = fl.read()
 
-with open('pref3.txt') as fl:
+with open('./filters/word_parts/pref3.txt') as fl:
     p3 = fl.read()
 
-with open('pref4.txt') as fl:
+with open('./filters/word_parts/pref4.txt') as fl:
     p4 = fl.read()
 
 suf2 = s2.split('\n')
@@ -79,16 +67,10 @@ pref3 = p3.split('\n')
 pref4 = p4.split('\n')
 
 
-# In[6]:
-
-
 #стоп-слова
-with open('stopwords.txt') as fl:
+with open('./filters/stopwprds/stopwords.txt') as fl:
     SW = fl.read()
 stopwords = SW.split('\n')
-
-
-# In[13]:
 
 
 #извлекаем кандидатов, на вход подается текст как строка
@@ -100,10 +82,6 @@ def get_term_candidates(text):
     for term in term_extractor(text):
         terms.append(term.normalized)
     return list_of_terms
-
-
-# In[14]:
-
 
 def cand_preprocessing(list_of_candidates):
     term_unigrams = []
@@ -152,9 +130,6 @@ def cand_preprocessing(list_of_candidates):
     return lem_uni, lem_bi, lem_tri, lem_multi
 
 
-# In[8]:
-
-
 def freq_scores(list_of_terms):#проверяем частотность
     scores = []
     
@@ -167,8 +142,6 @@ def freq_scores(list_of_terms):#проверяем частотность
             scores.append(0)
     return array(scores)
 
-
-# In[9]:
 
 
 def pref_scores(list_of_terms):#проверяем начало слов
@@ -184,9 +157,6 @@ def pref_scores(list_of_terms):#проверяем начало слов
         else:
             scores1.append(0)
     return array(scores1)
-
-
-# In[11]:
 
 
 def suf_scores(list_of_terms):#проверяем конец слов
@@ -205,9 +175,6 @@ def suf_scores(list_of_terms):#проверяем конец слов
     return array(scores2)
 
 
-# In[12]:
-
-
 def get_scores(list_of_terms):
     score1 = freq_scores(list_of_terms)
     score2 = suf_scores(list_of_terms)
@@ -224,9 +191,6 @@ def get_scores(list_of_terms):
             continue
     
     return cand_scores, winners
-
-
-# In[15]:
 
 
 def get_terms(text):
