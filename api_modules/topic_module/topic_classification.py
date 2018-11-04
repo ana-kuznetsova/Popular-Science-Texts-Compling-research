@@ -1,7 +1,4 @@
 # Imports
-import sys
-sys.path.append('C:\Program Files\Anaconda3\Lib\site-packages')
-
 import pickle
 
 import re
