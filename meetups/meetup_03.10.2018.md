@@ -94,18 +94,19 @@ _Ответственный:_ Коломенская Юлия
 
 Список подмодулей, входящих в `term_extractor`:
 
-1. 
-2. 
+1. модуль по извлечению терминов из текста `term_extractor.py`
+2. фильтры для модуля (n-граммы, стоп-слова, части слов, частотный словарь РЯ)
 
 _Текущий статус модулей:_
 
-1. 
-2. 
+1. `term_extrator.py` - завершен
+2. фильтры - обновлены и дополнены
 
 _Завершение работы над `python` модулями:_
+04.11.2018
 
 _Ссылка на код:_ 
-
+https://github.com/ana-kuznetsova/Popular-Science-Texts-Compling-research/blob/master/api_modules/term_extraction/term_extractor.py
 
 ### Readability Classifier 
 
