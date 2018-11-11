@@ -11,7 +11,7 @@ def extract_ner(user_text: str) -> list:
 def markup_ner(user_text: str) -> None:
     def tag_names(user_text: str, names:list):
         search_pattern = '|'.join(names)
-        replace_pattern = '<span class="name">\g<0></span>'
+        replace_pattern = '<\&\g<0>!\&'
         return re.sub(search_pattern, replace_pattern, user_text)
 
     detect_ner_tomita(user_text)
