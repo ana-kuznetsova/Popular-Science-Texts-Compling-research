@@ -53,7 +53,7 @@ def gunning_fog(text):
     grade = 0.4*(ksms.avg_sentence_length(text) + ksms.percent_syll(text))
     return round(grade,2)
        
-def count_statistics(text):
+def print_statistics(text):
     print('Russian Flesh reading Ease =', flesch_RE(text))
     print('Russian Flesh-Kincaid Grade =', flesch_kincaid_grade(text))
     print('Russian SMOG =', smog_index(text))
@@ -68,8 +68,7 @@ def statist_vectors(text):
     CLI = coleman_liau_index(text)
     DCH = dale_chall_score(text)
     GF = gunning_fog(text)
-    return [FRE, FKG, SMPG, CLI, DCH, GF]   
-    
+    return [FRE, FKG, SMOG, CLI, DCH, GF]   
     
     
     

@@ -89,51 +89,8 @@ def get_simple_metrics(text):
     ADF = percent_syll(text)
     return [SL, WC, ASL, TC, ALPW, ALPS, SYC, ASYPW, ASYPS, DW, ADF] 
     
-    
-def get_simple_metrics_df(text):
-    SL = len(sentence_splitter(text))
-    WC = len(text.split())
-    ASL = avg_sentence_length(text)
-    TC = char_count(text)
-    AWL = avg_letter_per_word(text)
-    ASLC = avg_letter_per_sent(text)
-    SYC = syllable_count(text)
-    ASYPW = avg_syllab_per_word(text)
-    ASYPS = avg_syllab_per_sent(text)
-    DW = diffsyll(text)
-    ADF = percent_syll(text)
-    
-    SL_df = pd.DataFrame(SL)
-    WC_df = pd.DataFrame(WC)
-    ASL_df = pd.DataFrame(ASL)
-    TC_df = pd.DataFrame(TC)
-    ALPW_df = pd.DataFrame(ALPW)
-    ALPS_df = pd.DataFrame(ALPS)
-    SYC_df = pd.DataFrame(SYC)
-    ASYPW_df = pd.DataFrame(ASYPW)
-    ASYPS_df = pd.DataFrame(ASYPS)
-    DW_df = pd.DataFrame(DW)
-    ADF_df = pd.DataFrame(ADF)
-    
-    df_metrics = pd.DataFrame({'A' : []})
-    
-    df_metrics['sentences'] = SL_df
-    df_metrics['words'] = WC_df
-    df_metrics['chars'] = TC_df
-    df_metrics['syllabs'] = SYC_df
-    df_metrics['avg sentence lenght'] = ASL_df
-    df_metrics['avg word lenght'] = ALPW_df
-    df_metrics['avg sent length-chars'] = ALPS_df
-    df_metrics['avg syllabs in word'] = ASYPW_df
-    df_metrics['avg syllabs in sent'] = ASYPS_df
-    df_metrics['diff words per text'] = DW_df
-    df_metrics['diff words persent'] = ADF_df
 
-   
-    return [df_metrics]     
-    
-    
-    
+
     
 def print_simple_metrics(text):
     print('Количество предложений в тексте:', len(sentence_splitter(text)))

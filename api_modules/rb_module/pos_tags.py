@@ -9,6 +9,8 @@ from collections import Counter
 
 morph = pymorphy2.MorphAnalyzer()
 
+#предобработка
+
 def strip_punctuation(s):
     return ''.join(c for c in s if c not in punctuation)
     
@@ -29,84 +31,9 @@ def tag_pymorphy(text):
         else:
             tagged.append('(' + tag + ')')
     return ' '.join(tagged)
-    
-    
-def tag_me_all(texts):
-    return [tag_pymorphy(text) for text in texts]    
+     
 
-    
-def count_noun(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    nouns = [word for word in words if re.findall('(NOUN)', word)]
-    return round(((len(nouns))/float(text_len))*100, 2)    
-    
-    
-def all_nouns(texts):
-    return [count_noun(text) for text in texts]
-    
-    
-def count_verb(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    verbs = [word for word in words if re.findall('(INFN)', word)]
-    return round(((len(verbs))/float(text_len))*100, 2)    
-    
-    
-def all_verbs(texts):
-    return [count_verb(text) for text in texts]
-    
-#а как сделать так, чтобы каждый раз морфик не запускать?    
-    
-def count_conj(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    conjs = [word for word in words if re.findall('(CONJ)', word)]
-    return round(((len(conjs))/float(text_len))*100, 2)    
-    
-    
-def all_conjs(texts):
-    return [count_conj(text) for text in texts]
-    
-    
-def count_prep(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    preps = [word for word in words if re.findall('(PREP)', word)]
-    return round(((len(preps))/float(text_len))*100, 2)    
-    
-    
-def all_preps(texts):
-    return [count_prep(text) for text in texts]
-    
-    
-def count_adj(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    adjs = [word for word in words if re.findall('(ADJF)', word)]
-    return round(((len(adjs))/float(text_len))*100, 2)    
-    
-    
-def all_adjs(texts):
-    return [count_adj(text) for text in texts]
-    
-    
-    
-def count_any_word(text, term):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    counted = [word for word in words if re.findall(term, word)]
-    return round(((len(counted))/float(text_len))*100, 2)    
-         
-def all_counted(texts, term):
-    return [count_adj(text, term) for text in texts]
-    
+#подсчет частей речи
     
 def count_all_pos(text):
     tagged = tag_pymorphy(text)
@@ -124,9 +51,27 @@ def count_all_pos(text):
     all_adjfs = round(((len(adjs))/float(text_len))*100, 2) 
     return [all_nouns, all_verbs, all_preps, all_conjs, all_adjfs]
     
-def count_all_all(texts):
-    return [count_all_pos(text) for text in texts]
-    
 
+
+def print_tags(text):
+    tagged = tag_pymorphy(text)
+    words = tagged.split(' ')
+    text_len = len(text.split())
+    nouns = [word for word in words if re.findall('(NOUN)', word)]
+    verbs = [word for word in words if re.findall('(INFN)', word)]
+    preps = [word for word in words if re.findall('(PREP)', word)]
+    conjs = [word for word in words if re.findall('(CONJ)', word)]
+    adjs = [word for word in words if re.findall('(ADJF)', word)]
+    all_nouns = round(((len(nouns))/float(text_len))*100, 2)
+    all_verbs = round(((len(verbs))/float(text_len))*100, 2)
+    all_preps = round(((len(preps))/float(text_len))*100, 2)
+    all_conjs = round(((len(conjs))/float(text_len))*100, 2)
+    all_adjfs = round(((len(adjs))/float(text_len))*100, 2) 
+    
+    print('NOUNS:', all_nouns)
+    print('VERBS:', all_verbs)
+    print('PREPOSITIONS:', all_preps)
+    print('CONJS:', all_conjs)
+    print('ADJECTIVES:', all_adjfs)
 
     
