@@ -61,8 +61,6 @@ def measure_find(text):
     return text_meas
 
     
-
-    
 def any_comparor(text, vocabular): #если нужно будет добавить еще один словарь не изменяя модуль
     text_len = len(text.split())
     common_words = 0
@@ -79,14 +77,13 @@ def compare_all(text):
     rudes = rude_compare(text)*100
     measures = measure_find(text)*100
     return [talks, commons, rudes, measures]
-    
-def print_compare_all(text):
-    talks = talks_compare(text)*100
-    commons = common_compare(text)*100
-    rudes = rude_compare(text)*100
-    measures = measure_find(text)*100
-    print('Разговорные слова:', talks)
-    print('Общие слова:', commons)
-    print('Грубые слова:', rudes)
-    print('Приставки СИ:', measures)
-	
+
+def dict_stringer(text):
+    dict = compare_all(text)
+    sup = ('Разговорные слова:', dict[0],
+    'Общие слова:', dict[1],
+    'Грубые слова:', dict[2],
+    'Приставки СИ:', dict[3])
+    llist = list(sup)
+    dict_conc = ' '.join(str(x) for x in llist)
+    return dict_conc

@@ -6,7 +6,6 @@ import nltk
 from string import punctuation
 from collections import Counter
 
-
 morph = pymorphy2.MorphAnalyzer()
 
 #предобработка
@@ -51,27 +50,11 @@ def count_all_pos(text):
     all_adjfs = round(((len(adjs))/float(text_len))*100, 2) 
     return [all_nouns, all_verbs, all_preps, all_conjs, all_adjfs]
     
-
-
-def print_tags(text):
-    tagged = tag_pymorphy(text)
-    words = tagged.split(' ')
-    text_len = len(text.split())
-    nouns = [word for word in words if re.findall('(NOUN)', word)]
-    verbs = [word for word in words if re.findall('(INFN)', word)]
-    preps = [word for word in words if re.findall('(PREP)', word)]
-    conjs = [word for word in words if re.findall('(CONJ)', word)]
-    adjs = [word for word in words if re.findall('(ADJF)', word)]
-    all_nouns = round(((len(nouns))/float(text_len))*100, 2)
-    all_verbs = round(((len(verbs))/float(text_len))*100, 2)
-    all_preps = round(((len(preps))/float(text_len))*100, 2)
-    all_conjs = round(((len(conjs))/float(text_len))*100, 2)
-    all_adjfs = round(((len(adjs))/float(text_len))*100, 2) 
-    
-    print('NOUNS:', all_nouns)
-    print('VERBS:', all_verbs)
-    print('PREPOSITIONS:', all_preps)
-    print('CONJS:', all_conjs)
-    print('ADJECTIVES:', all_adjfs)
-
-    
+def pos_stringer(text):
+    pos = count_all_pos(text)
+    sup = ('NOUNS:', pos[0], 'VERBS:', pos[1],
+    'PREPOSITIONS:', pos[2], 'CONJS:', pos[3],
+    'ADJECTIVES:', pos[4])
+    llist = list(sup)
+    pos_conc = ' '.join(str(x) for x in llist)
+    return pos_conc
