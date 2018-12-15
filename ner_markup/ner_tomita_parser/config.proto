@@ -2,21 +2,17 @@ encoding "utf8"; // указываем кодировку, в которой н�
 
 
 TTextMinerConfig {
-  Dictionary = "dic.gzt"; // путь к корневому словарю
-  PrettyOutput = "evaluation.html"; // путь к файлу с отладочным выводом в удобном для чтения виде
+  Dictionary = "dic.gzt"; 
   Input = {
-   // Dir = "sci_names_eval"; // путь к входному файлу
-   File = "text1.txt";
+   File = "user_text.txt";
   }
   Articles = [
-    { Name = "sci_names" } // название статьи в корневом словаре,
-                                          // которая содержит запускаемую грамматику
+    { Name = "sci_names" } 
   ]
-  PrintRules="rules.txt";
   Facts = [
     { Name = "Person" }]
     
   Output = {
-      File = "evaluation.xml";
+      File = "names.xml";
       Format = xml; }
 }
