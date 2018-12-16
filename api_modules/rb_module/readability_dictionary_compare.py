@@ -16,13 +16,13 @@ talks = list(map(lambda x:x.strip(), talks))
 #terms = list(map(lambda x:x.strip(), terms))
 #предобработка текстов
 
-morph = pm.MorphAnalyzer()
+#morph = pm.MorphAnalyzer()
 
-def morphy_words(text):
-    nolinks = ' '.join([word for word in text.split() if (not re.findall('https?://|\w\.\w', word))])#удалили ссылки
-    clean_line = re.sub('[\W\d_-]+', ' ', nolinks.lower().strip())
-    ws = re.split(' +', clean_line)
-    return [morph.parse(w)[0].normal_form for w in ws]
+#def morphy_words(text):
+#    nolinks = ' '.join([word for word in text.split() if (not re.findall('https?://|\w\.\w', word))])#удалили ссылки
+#    clean_line = re.sub('[\W\d_-]+', ' ', nolinks.lower().strip())
+#    ws = re.split(' +', clean_line)
+#    return [morph.parse(w)[0].normal_form for w in ws]
     
 #сравниваем предобработанные тексты со списками слов
 
