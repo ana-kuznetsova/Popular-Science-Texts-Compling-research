@@ -8,7 +8,6 @@ import os
 import string
 from pyphen import Pyphen
 import pymorphy2
-import tqdm
 import nltk
 from string import punctuation
 from collections import Counter
