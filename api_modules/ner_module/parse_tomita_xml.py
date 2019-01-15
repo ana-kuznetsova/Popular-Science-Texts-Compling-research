@@ -13,13 +13,8 @@ morph = pymorphy2.MorphAnalyzer()
 # Define auxiliary functions
 
 def _slurp(path):
-    try:
-        with open(path, 'r') as fo:
-            text = fo.read()
-    except UnicodeDecodeError:
-        print(path)
-        with open(path, 'r', encoding='cp1252') as fo:
-            text = fo.read()
+    with open(path, 'r') as fo:
+        text = fo.read()
     return text
 
 
@@ -54,7 +49,6 @@ def _parse_xml(xml_output):
     Names require further processing. '''
     xml = bs.BeautifulSoup(xml_output, 'lxml')
     names = xml.find_all('name')
-    pattern = re.compile(r'val="([А-ЯЁ]+)">')
     names_extracted = []
     for name in names:
         name = name.get('val')
