@@ -10,6 +10,9 @@ def extract_ner(user_text: str) -> list:
     return names
 
 def markup_ner(user_text: str) -> None:
+    '''Function annotates names in a text
+    string with conventional tags. Optional
+    for web application'''
     def tag_names(user_text: str, names:list):
         search_pattern = '|'.join(names)
         replace_pattern = '<\&\g<0>!\&'
