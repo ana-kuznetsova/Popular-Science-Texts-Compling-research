@@ -7,7 +7,7 @@ def extract_ner(user_text: str) -> list:
     application'''
     launch_tomita(user_text)
     names = parse_user_text(user_text)
-    return names
+    return ','.join(names)
 
 def markup_ner(user_text: str) -> None:
     '''Function annotates names in a text
